@@ -10,10 +10,18 @@ export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
+    <>
     <main className="min-h-screen flex flex-col items-center justify-center bg-base-200 text-base-content p-4">
+      <nav className="sticky mb-8 mt-2">
+        <ul className="flex justify-between">
+          <li className="mr-3">Projects</li>
+          <li className="mr-3">Experience</li>
+          <li className="mr-3">Education</li>
+        </ul>
+      </nav>
       <section className="text-center space-y-4">
-        <h2 className="text-4xl">Hi 👋, I'm <span className="font-bold">Razif</span> </h2>
-        <p className="text-xl">I am a Software Engineer who is always curious and excited to learn new things</p>
+        <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold">Razif</span> </h2>
+        <p className="text-xl">A Software Engineer who is always curious and excited to learn new things</p>
         <button className="btn btn-primary">Get in touch</button>
       </section>
 
@@ -91,5 +99,6 @@ export default function Home() {
         <p>Share your thoughts, tutorials, or articles.</p>
       </section> */}
     </main>
+    </>
   );
 }
