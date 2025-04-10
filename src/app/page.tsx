@@ -5,17 +5,30 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-function NavBar(props: {items : {text: string,link: string}[]}){
+function NavItemUnderline(props: {text: string,link: string, key:number}){
+  return (<li className="mr-3"><a className="underline
+    decoration-transparent underline-offset-[10px] decoration-2
+    transition-all ease-in
+    hover:decoration-inherit hover:underline-offset-8 " href={props.link} >{props.text}</a></li>)
+}
+
+function NavItemBracket(props: {text: string,link: string, key:number}){
+  const [hover, setHover] = useState(false)
+
+  const text = hover ? `[${props.text}]` : props.text
+  return (<li className="px-2 min-w-40 text-center"><a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} className="underline
+    decoration-transparent underline-offset-[10px] decoration-2
+    transition-all ease-in" href={props.link}>{text}</a></li>)
+}
+
+function NavBar(props: {items : {text: string,link: string, key:number}[]}){
   return (
     <>
       <nav className="top-0 inset-x-0 sticky py-4 px-4 bg-base-100 min-w-screen">
         <ul className="flex justify-center">
           {
             props.items.map((item) => {
-              return (<li className="mr-3"><a className="underline
-                decoration-transparent underline-offset-[10px] decoration-2
-                transition-all ease-in
-                hover:decoration-inherit hover:underline-offset-8 " href={item.link} >{item.text}</a></li>)
+              return <NavItemBracket text={item.text} link={item.link} key={item.key}/>
             })
           }
         </ul>
@@ -31,10 +44,10 @@ export default function Home() {
     <>
     <main className="min-h-screen flex flex-col items-center justify-center bg-base-300 text-base-content px-4">
       <NavBar items={[
-        {text: "Projects", link: "#projects"},
-        {text: "Experience", link: "#experience"},
-        {text: "About Me", link: "#aboutme"},
-        {text: "Contact", link: "#contacts"},
+        {text: "Projects", link: "#projects", key:1},
+        {text: "Experience", link: "#experience", key:2},
+        {text: "About Me", link: "#aboutme", key:3},
+        {text: "Contact", link: "#contacts", key:4},
         ]}/>
       <section className="text-center space-y-4">
         <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold">Razif</span> </h2>
