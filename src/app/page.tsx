@@ -24,7 +24,7 @@ function NavItemBracket(props: {text: string,link: string, key:number}){
 function NavBar(props: {items : {text: string,link: string, key:number}[]}){
   return (
     <>
-      <nav className="top-0 inset-x-0 sticky py-4 px-4 bg-base-300 min-w-screen">
+      <nav className="top-0 inset-x-0 fixed py-4 px-4 bg-base-300 min-w-screen">
         <ul className="flex justify-center">
           {
             props.items.map((item) => {
@@ -40,10 +40,8 @@ function NavBar(props: {items : {text: string,link: string, key:number}[]}){
 function FullPaddedSection(props :PropsWithChildren) {
   return (
     <>
-    <section className="min-h-screen justify-center justify-items-center flex-col flex">
-      <div className="px-30 space-y-4">
+    <section className="h-screen px-30">
         {props.children}
-      </div>
     </section>
     </>
   )
@@ -62,9 +60,11 @@ export default function Home() {
         ]}/>
       <main className="min-h-screen flex flex-col items-center justify-center bg-base-300 text-base-content">
         <FullPaddedSection>
-            <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold">Razif</span> </h2>
-            <p className="text-xl">A Software Engineer who is always curious and excited to learn new things</p>
-            <button className="btn btn-primary">Get in touch</button>
+          <div className="space-y-4 h-full flex flex-col justify-center">
+            <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
+            <p className="text-xl text-base-content/70">A Software Engineer who is always curious and excited to learn new things</p>
+            <button className="btn btn-primary col-2">Get in touch</button>
+          </div>
         </FullPaddedSection>
 
         <FullPaddedSection>
