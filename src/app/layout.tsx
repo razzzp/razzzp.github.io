@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "razif.me",
+  title: "Razif Pramuda",
   description: "Razif's Personal Site",
 };
 
