@@ -12,22 +12,30 @@ function NavItemUnderline(props: {text: string,link: string, key:number}){
     hover:decoration-inherit hover:underline-offset-8 " href={props.link} >{props.text}</a></li>)
 }
 
-function NavItemBracket(props: {text: string,link: string, key:number}){
+function NavItemBracket(props: {text: string,link: string, idx: number}, ){
   const [hover, setHover] = useState(false)
 
   const text = hover ? `[ ${props.text} ]` : props.text
-  return (<li className="px-2 min-w-40 text-center"><a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} 
-    className="" href={props.link}>{text}</a></li>)
+  return (
+    <li key={props.idx} className="px-2 min-w-40 text-center">
+      <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={props.link}>{text}</a>
+    </li>
+    )
 }
 
-function NavBar(props: {items : {text: string,link: string, key:number}[]}){
+function NavBar(props: {items : {text: string,link: string}[]}){
   return (
     <>
-      <nav className="sticky top-0 py-4 px-20 bg-base-300 w-screen">
+      <nav className="sticky top-0 py-4 px-20 bg-base-300">
         <ul className="flex justify-center">
           {
-            props.items.map((item) => {
-              return <NavItemBracket text={item.text} link={item.link} key={item.key}/>
+            props.items.map((item, idx) => {
+              const [hover, setHover] = useState(false)
+
+              const text = hover ? `[ ${item.text} ]` : item.text
+              return <li key={idx} className="px-2 min-w-40 text-center">
+                <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={item.link}>{text}</a>
+              </li>
             })
           }
         </ul>
@@ -68,12 +76,12 @@ export default function Home() {
   return (
     <>
       <NavBar items={[
-        {text: "Projects", link: "#projects", key:1},
-        {text: "Experience", link: "#experience", key:2},
-        {text: "Education", link: "#education", key:3},
-        {text: "Contact", link: "#contact", key:4},
+        {text: "Projects", link: "#projects"},
+        {text: "Experience", link: "#experience"},
+        {text: "Education", link: "#education"},
+        {text: "Contact", link: "#contact"},
         ]}/>
-      <main className="min-h-screen flex flex-col items-center justify-center bg-base-300 text-base-content">
+      <main className="flex flex-col items-center justify-center bg-base-300 text-base-content">
         <FullPaddedSection>
           <div className="space-y-4 h-screen flex flex-col justify-center -top-30 relative">
             <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
@@ -135,7 +143,7 @@ export default function Home() {
           </div>
         </FullPaddedSection>
 
-        <FullPaddedSection secId="Experience">
+        <FullPaddedSection secId="experience">
           <h2 className="text-4xl pd-4 pt-8">Experience</h2>
           TODO
         </FullPaddedSection>
