@@ -13,15 +13,13 @@ function NavItemUnderline(props: {text: string,link: string, key:number}){
     hover:decoration-inherit hover:underline-offset-8 " href={props.link} >{props.text}</a></li>)
 }
 
-function NavItemBracket(props: {text: string,link: string, idx: number}, ){
+function NavItemBracket(props:{text:string, link:string}){
   const [hover, setHover] = useState(false)
 
   const text = hover ? `[ ${props.text} ]` : props.text
-  return (
-    <li key={props.idx} className="px-2 min-w-40 text-center">
-      <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={props.link}>{text}</a>
-    </li>
-    )
+  return <li className="px-2 min-w-40 text-center font-mono">
+    <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={props.link}>{text}</a>
+  </li>
 }
 
 function NavBar(props: {items : {text: string,link: string}[]}){
@@ -31,12 +29,7 @@ function NavBar(props: {items : {text: string,link: string}[]}){
         <ul className="flex justify-center">
           {
             props.items.map((item, idx) => {
-              const [hover, setHover] = useState(false)
-
-              const text = hover ? `[ ${item.text} ]` : item.text
-              return <li key={idx} className="px-2 min-w-40 text-center font-mono">
-                <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={item.link}>{text}</a>
-              </li>
+              return <NavItemBracket text={item.text} link={item.link} key={idx}/>
             })
           }
         </ul>
