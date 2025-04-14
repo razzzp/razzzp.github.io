@@ -84,9 +84,41 @@ function ProjectComp(props:{project:Project}){
   )
 }
 
-export default function Home() {
-  const [open, setOpen] = useState(false);
+function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+    <div className="fixed bottom-6 right-6 z-50">
+      <div className="dropdown dropdown-top dropdown-end">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-circle btn-primary shadow-lg"
+          onClick={()=>setOpen(!open)}
+        >
+          {open ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
+        </div>
+          <ul
+            tabIndex={0}
+            className={`menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-44 space-y-1}`}
+          >
+            {
+              props.items.map((item,idx)=>{
+                return <li key={idx}>
+                  <Link href={item.link}>
+                    {item.text}
+                  </Link>
+                </li>
+              })
+            }
+          </ul>
+      </div>
+    </div>
+    </>
+  )
+}
 
+export default function Home() {
   return (
     <>
       <NavBar items={[
@@ -137,41 +169,14 @@ export default function Home() {
         </FullPaddedSection>
 
         {/* Floating Collapsible Menu */}
-        <div className="fixed bottom-6 right-6 z-50">
-          <div className="dropdown dropdown-top dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-circle btn-primary shadow-lg"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
-            </div>
-            {open && (
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-44 space-y-1"
-              >
-                <li>
-                  <Link href="#about" onClick={() => setOpen(false)}>
-                    About Me
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#portfolio" onClick={() => setOpen(false)}>
-                    Portfolio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#blogs" onClick={() => setOpen(false)}>
-                    Blogs
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </div>
-        </div>
-    </main>
+        <CollapsibleFloatingButton items={
+          [
+            {text:"About Me", link:"#aboutme"},
+            {text:"Blogs", link:""},
+            {text:"Portfolio", link:""},
+          ]
+        }/>
+        </main>
     </>
   );
 }
