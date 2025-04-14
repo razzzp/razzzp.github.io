@@ -4,6 +4,7 @@
 import { PropsWithChildren, ReactNode, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Project, projects } from "./data";
 
 function NavItemUnderline(props: {text: string,link: string, key:number}){
   return (<li className="mr-3"><a className="underline
@@ -33,7 +34,7 @@ function NavBar(props: {items : {text: string,link: string}[]}){
               const [hover, setHover] = useState(false)
 
               const text = hover ? `[ ${item.text} ]` : item.text
-              return <li key={idx} className="px-2 min-w-40 text-center">
+              return <li key={idx} className="px-2 min-w-40 text-center font-mono">
                 <a onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} href={item.link}>{text}</a>
               </li>
             })
@@ -70,6 +71,19 @@ function TagsList(props: {tags: string[]}){
   )
 }
 
+function ProjectComp(props:{project:Project}){
+  return (
+    <>
+    <div className="py-4 space-y-4">
+    <h3 className="text-2xl pt-4 mb-1 text-primary font-mono">{props.project.title}</h3>
+    {props.project.content}
+    <a className="link-info block" href={props.project.githubUrl}>Github</a>
+    <TagsList tags={props.project.tags}/>
+    </div>
+    </>
+  )
+}
+
 export default function Home() {
   const [open, setOpen] = useState(false);
 
@@ -84,63 +98,19 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center bg-base-300 text-base-content">
         <FullPaddedSection>
           <div className="space-y-4 h-screen flex flex-col justify-center -top-30 relative">
-            <h2 className="text-4xl">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
+            <h2 className="text-4xl font-mono">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
             <p className="text-xl text-base-content/70">A Software Engineer who is always curious and excited to learn new things</p>
             <button className="btn btn-primary w-50">Get in touch</button>
           </div>
         </FullPaddedSection>
 
         <FullPaddedSection secId="projects">
-          <h2 className="text-4xl pd-4 pt-8">Projects</h2>
-          <div className="py-4 space-y-4">
-            <h3 className="text-2xl pt-4 mb-1 text-primary">Breathe.io</h3>
-            <p className="text-neutral-content">Breathe.io is a platform offering air quality monitoring and insights, designed for both individuals and businesses. 
-              It includes features like real-time alerts, detailed air quality reports, and environmental recommendations.</p>
-            <a className="link-info block" href="https://github.com/h8-breathe-io/breathe-io">Github</a>
-            <TagsList tags={
-              [
-                "Go","Echo","PostgreSQL","gRPC","Xendit","Mailtrap", "Open-Meteo API"
-              ]
-            }/>
-          </div>
-
-          <div className="py-4 space-y-4">
-            <h3 className="text-2xl pt-4 mb-1 text-primary">Car Rental Management App Backend</h3>
-            <p className="text-neutral-content">Backend for a Car Rental Management Application.<br/>
-              Provide features to manage the business’ car fleet, allow users to make rental bookings, 
-              make payments and notify important events to users by email.</p>
-            <a className="link-info block" href="https://github.com/razzzp/h8-p2-finalproj">Github</a>
-            <TagsList tags={
-              [
-                "Go","Echo","PostgreSQL","GORM","Xendit","Google SMTP","Testify"
-              ]
-            }/>
-          </div>
-
-          <div className="py-4 space-y-4">
-            <h3 className="text-2xl pt-4 mb-1 text-primary">LSP (Language Server Protocol) Server for a Domain Specific Language</h3>
-            <p className="text-neutral-content">Lexer, Parser and LSP Server for a Domain Specific Language using Rust.<br/>
-              Implemented Linter/Analyzer to check for programming rules, provide Goto Definition, Auto-complete and other features<br/>
-              Utilized multi-threading to allow analysis of projects containing 50,000+ source files.</p>
-            <a className="link-info block" href="https://github.com/razzzp/gold-lang-lsp">Github</a>
-            <TagsList tags={
-              [
-                "Rust","LSP","Multi-threading"
-              ]
-            }/>
-          </div>
-
-          <div className="py-4 space-y-4">
-            <h3 className="text-2xl pt-4 mb-1 text-primary">Dog Kennel Monitoring System</h3>
-            <p className="text-neutral-content">Modular dog kennel monitoring system that can measure the temperature and humidity of dog kennels in real time. <br/>
-              Designed the system for easy implementation in a dog shelter environment and scalable up to hundreds of kennels.</p>
-            {/* <a className="link-info block" href="https://github.com/razzzp/gold-lang-lsp">Github</a> */}
-            <TagsList tags={
-              [
-                "C++","Qt"
-              ]
-            }/>
-          </div>
+          <h2 className="text-4xl pd-4 pt-8 font-mono">Projects</h2>
+          {
+            projects.map((proj, idx)=>{
+              return <ProjectComp project={proj} key={idx}/>
+            })
+          }
         </FullPaddedSection>
 
         <FullPaddedSection secId="experience">
