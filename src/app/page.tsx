@@ -4,7 +4,7 @@
 import { PropsWithChildren, ReactNode, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Project, projects } from "./data";
+import { experiences, Position, Project, projects } from "./data";
 
 function NavItemUnderline(props: {text: string,link: string, key:number}){
   return (<li className="mr-3"><a className="underline
@@ -111,6 +111,68 @@ function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
   )
 }
 
+function dispDate(date: Date): string{
+  return date.toLocaleString("en-US", { month: "short", year: "numeric" });
+}
+
+function PositionComp(props: {pos: Position}) {
+  return (
+    <>
+    <li>
+      <div className="font-bold">{props.pos.title}</div>
+      <div className="text-neutral-content">
+        {props.pos.content}
+      </div>
+    </li>
+    </>
+  )
+}
+
+function ExperienceTimeline() {
+  return (
+    <>
+    <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+    {
+      experiences.map((exp,idx,arr)=>{
+        return (
+          <>
+            <li key={idx}>
+              <div className="timeline-middle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div className="timeline-start"><time className="font-mono italic">{dispDate(exp.startDate)}{exp.endDate? `- ${dispDate(exp.endDate)}`: " - Current"}</time></div>
+              <div className="timeline-end mb-10 md:text-end">                      
+                <div className="text-lg font-black font-mono">{exp.title}</div>
+                <ul>
+                {
+                  exp.positions.map((pos, pidx)=> {
+                    return <PositionComp pos={pos}  key={pidx} />
+                  })
+                }
+                </ul>
+              </div>
+              <hr className={idx != arr.length-1 ?  "bg-secondary" : ""}/>
+            </li>
+          </>
+        )
+      })
+    }
+    </ul>
+    </>
+  )
+}
+
 export default function Home() {
   return (
     <>
@@ -139,20 +201,20 @@ export default function Home() {
         </FullPaddedSection>
 
         <FullPaddedSection secId="experience">
-          <h2 className="text-4xl pd-4 pt-8">Experience</h2>
-          TODO
+          <h2 className="text-4xl pd-4 pt-8 font-mono">Experience</h2>
+          <ExperienceTimeline />
         </FullPaddedSection>
 
         <FullPaddedSection secId="education">
           <h2 className="text-4xl pd-4 pt-8" id="education">Education</h2>
           <div className="py-4">
             <h3 className="text-2xl text-primary">Hacktiv8</h3>
-            <h4 className="text-secondary-content">Go Backend</h4>
+            <h4 className="font-bold">Go Backend</h4>
           </div>
 
           <div className="py-4">
             <h3 className="text-2xl text-primary">University of Nottingham</h3>
-            <h4 className="text-secondary-content">MEng Electrical and Electronic Engineering</h4>
+            <h4 className="font-bold">MEng Electrical and Electronic Engineering</h4>
           </div>
         </FullPaddedSection>
 

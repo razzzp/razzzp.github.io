@@ -64,3 +64,107 @@ export const projects: Project[] = [
   },
 ];
 
+export type Position = {
+  title: string,
+  content?: ReactNode 
+}
+
+export type Experience  = {
+  title: string;
+  content?: ReactNode;
+  location: string;
+  startDate: Date;
+  endDate?: Date;
+  positions: Position[]
+}
+
+export const experiences : Experience[] = [
+  {
+    title: "Sea Labs",
+    location: "Jakarta, Indonesia",
+    startDate: new Date(2025,2),
+    positions: [
+      {
+        title: "Software Engineer",
+        content: (
+          <>
+          <ul>
+            <li></li>
+          </ul>
+          </>
+        )
+      }
+    ]
+  },
+  {
+    title: "IDEMIA",
+    location: "Jakarta, Indonesia",
+    startDate: new Date(2022,2),
+    endDate: new Date(2025,2),
+    positions: [
+      {
+        title: "Software Development Engineer III",
+        content: (
+          <>
+            <ul>
+              <li>Designed and reviewed software architecture documents.</li>
+              <li>Led project initiation, analyzing requirements, architecture, and new technologies.</li>
+              <li>Ensured development team readiness through knowledge sharing and training.</li>
+              <li>Oversaw project execution in collaboration with testers, product owners, and stakeholders.</li>
+            </ul>
+          </>
+        )
+      },
+      {
+        title: "Software Development Engineer II",
+        content: (
+          <>
+            <ul>
+              <li>Lead development teams with up to 7 members (developers & testers) to deliver 38 features.</li>
+              <li>Achieved &gt; 90% on time delivery.</li>
+              <li>Took up product owner roles for several features.</li>
+              <li>Through exploration of new methods, was able to cut development time in half for 1 feature.</li>
+              <li>Contributed to feature design & architectures.</li>
+              <li>Perform code reviews to ensure quality and maintainability of code pushed to production.</li>
+              <li>Developed code analyzer to reduce code review time, by automatically checking programming rules.</li>
+              <li>Held knowledge sharing sessions and mentoring to increase team knowledge.</li>
+              <li>Contributed to the decrease of 40% issues found in production.</li>
+            </ul>
+          </>
+        )
+      },
+      {
+        title: "Software Development Engineer I",
+        content: (
+          <>
+            <ul>
+              <li>12 Features developed with &gt;90% on time delivery, and &gt;85% first time right.</li>
+              <li>38 Bugs resolved with &gt;90% meeting SLA.</li>
+              <li>10 improvement ideas proposed &amp; implemented.</li>
+            </ul>
+          </>
+        )
+      }
+    ]
+  },
+  {
+    title: "TimeTec Cloud Sdn Bhd",
+    location: "Malaysia",
+    startDate: new Date(2017,7),
+    endDate: new Date(2017,9),
+    positions: [
+      {
+        title: "Intern",
+        content: (
+          <>
+            <ul>
+              <li>Tested biometric products and ensured that they function according to the company’s standards.</li>
+              <li>Troubleshooted and repaired faulty devices.</li>
+              <li>Compiled reports showing all the updated features available in the company’s product listing, to ensure clarity in the documentation.</li>
+            </ul>
+          </>
+        )
+      }
+    ]
+  }
+] 
