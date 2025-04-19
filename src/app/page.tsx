@@ -41,7 +41,7 @@ function NavBar(props: {items : {text: string,link: string}[]}){
 function FullPaddedSection(props :{children:ReactNode, secId?: string}) {
   return (
     <>
-    <section className="min-h-screen min-w-screen px-30">
+    <section className="min-h-screen w-full">
         {/* dummy sec for anchor */}
         <div id={props.secId} className="h-4"></div>
         {props.children}
@@ -180,7 +180,7 @@ export default function Home() {
         {text: "Education", link: "#education"},
         {text: "Contact", link: "#contact"},
         ]}/>
-      <main className="flex flex-col items-center justify-center bg-base-300 text-base-content">
+      <main className="flex flex-col items-center justify-center bg-base-300 text-base-content px-15 md:px-30">
         <FullPaddedSection>
           <div className="space-y-4 h-screen flex flex-col justify-center -top-30 relative">
             <h2 className="text-4xl font-mono">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
