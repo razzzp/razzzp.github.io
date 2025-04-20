@@ -26,8 +26,8 @@ function NavItemBracket(props:{text:string, link:string}){
 function NavBar(props: {items : {text: string,link: string}[]}){
   return (
     <>
-      <nav className="sticky top-0 py-4 px-20 bg-base-300 z-1">
-        <ul className="flex justify-center">
+      <nav className="sticky top-0 py-4 px-20 z-1 backdrop-blur">
+        <ul className="flex justify-center z-2">
           {
             props.items.map((item, idx) => {
               return <NavItemBracket text={item.text} link={item.link} key={idx}/>
@@ -68,8 +68,8 @@ function TagsList(props: {tags: string[]}){
 function ProjectComp(props:{project:Project}){
   return (
     <>
-    <div className="py-4 space-y-4">
-    <h3 className="text-2xl pt-4 mb-1 text-primary font-mono">{props.project.title}</h3>
+    <div className="pb-10 space-y-4">
+    <h3 className="text-2xl mb-1 text-primary font-mono">{props.project.title}</h3>
     {props.project.content}
     <a className="link-info block" href={props.project.githubUrl}>Github</a>
     <TagsList tags={props.project.tags}/>
@@ -82,7 +82,7 @@ function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
   const [open, setOpen] = useState(false)
   return (
     <>
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-1">
       <div className="dropdown dropdown-top dropdown-end">
         <div
           tabIndex={0}
@@ -193,6 +193,63 @@ function ExperienceTimeline() {
   )
 }
 
+function ExperienceTimelineCustom() {
+  return (
+    <>
+    <ul className="">
+    {
+      experiences.map((exp,idx,arr)=>{
+        return (
+          <li key={idx}>
+            {/* icon */}
+            <div className="grid grid-cols-12 lg:grid-rows-[20px_auto] lg:grid-cols-[max-content_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+              <div className="lg:col-start-4 lg:self-start col-start-1 justify-self-center self-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              {/* line */}
+              {
+                idx != arr.length-1 ?  
+                  <div className={"lg:col-start-4 lg:row-start-2 col-start-1 justify-self-center border-0 w-[0.25em] h-full bg-secondary"}/> 
+                  : "" 
+              }
+              {/* time */}
+              <div className="lg:col-start-1 lg:col-span-3 row-start-1 col-start-2 col-span-full items-start">
+                <time className="font-mono italic">{dispDate(exp.startDate)}{exp.endDate? `- ${dispDate(exp.endDate)}`: " - Current"}</time>
+              </div>
+              {/* content */}
+              <div className="lg:col-start-5 lg:row-start-1  lg:row-span-2 row-start-2 col-start-2 col-span-full pb-7">                      
+                <div className="text-lg font-black font-mono">{exp.title}</div>
+                <Expandable>
+                <ul>
+                {
+                  exp.positions.map((pos, pidx)=> {
+                    return <PositionComp pos={pos}  key={pidx} />
+                  })
+                }
+                </ul>
+                </Expandable>
+              </div>
+            </div>
+          </li>
+        )
+      })
+    }
+    </ul>
+    </>
+  )
+}
+
 export default function Home() {
   return (
     <>
@@ -202,9 +259,9 @@ export default function Home() {
         {text: "Education", link: "#education"},
         {text: "Contact", link: "#contact"},
         ]}/>
-      <main className="flex flex-col items-center justify-center bg-base-300 text-base-content px-15 md:px-30">
+      <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-30">
         <FullPaddedSection>
-          <div className="space-y-4 h-screen flex flex-col justify-center -top-30 relative">
+          <div className="space-y-4 h-[70vh] flex flex-col justify-center">
             <h2 className="text-4xl font-mono">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
             <p className="text-xl text-base-content/70">A Software Engineer who is always curious and excited to learn new things</p>
             <ul className="ml-1 mt-8 flex items-center" aria-label="Social media">
@@ -235,7 +292,7 @@ export default function Home() {
         </FullPaddedSection>
 
         <FullPaddedSection secId="projects">
-          <h2 className="text-4xl pd-4 pt-8 font-mono">Projects</h2>
+          <h2 className="text-4xl pb-4 pt-8 font-mono">Projects</h2>
           {
             projects.map((proj, idx)=>{
               return <ProjectComp project={proj} key={idx}/>
@@ -244,18 +301,18 @@ export default function Home() {
         </FullPaddedSection>
 
         <FullPaddedSection secId="experience">
-          <h2 className="text-4xl pd-4 pt-8 font-mono">Experience</h2>
-          <ExperienceTimeline />
+          <h2 className="text-4xl pb-4 pt-8 font-mono">Experience</h2>
+          <ExperienceTimelineCustom />
         </FullPaddedSection>
 
         <FullPaddedSection secId="education">
-          <h2 className="text-4xl pd-4 pt-8" id="education">Education</h2>
-          <div className="py-4">
+          <h2 className="text-4xl pb-4 pt-8" id="education">Education</h2>
+          <div className="pb-4">
             <h3 className="text-2xl text-primary">Hacktiv8</h3>
             <h4 className="font-bold">Go Backend</h4>
           </div>
 
-          <div className="py-4">
+          <div className="pb-4">
             <h3 className="text-2xl text-primary">University of Nottingham</h3>
             <h4 className="font-bold">MEng Electrical and Electronic Engineering</h4>
           </div>
