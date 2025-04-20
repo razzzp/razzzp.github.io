@@ -97,7 +97,7 @@ export const experiences : Experience[] = [
   {
     title: "IDEMIA",
     location: "Jakarta, Indonesia",
-    startDate: new Date(2022,1),
+    startDate: new Date(2020,1),
     endDate: new Date(2025,1),
     positions: [
       {
