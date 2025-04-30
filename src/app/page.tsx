@@ -259,7 +259,7 @@ export default function Home() {
         {text: "About Me", link: "#aboutme"},
         {text: "Contact", link: "#contact"},
         ]}/>
-      <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-30">
+      <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-50">
         <FullPaddedSection>
           <div className="space-y-4 h-[70vh] flex flex-col justify-center">
             <h2 className="text-4xl font-mono">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
