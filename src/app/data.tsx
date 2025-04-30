@@ -117,13 +117,8 @@ export const experiences : Experience[] = [
           <>
               <li>Lead development teams with up to 7 members (developers & testers) to deliver 38 features.</li>
               <li>Achieved &gt; 90% on time delivery.</li>
-              <li>Took up product owner roles for several features.</li>
-              <li>Through exploration of new methods, was able to cut development time in half for 1 feature.</li>
               <li>Contributed to feature design & architectures.</li>
               <li>Perform code reviews to ensure quality and maintainability of code pushed to production.</li>
-              <li>Developed code analyzer to reduce code review time, by automatically checking programming rules.</li>
-              <li>Held knowledge sharing sessions and mentoring to increase team knowledge.</li>
-              <li>Contributed to the decrease of 40% issues found in production.</li>
           </>
         )
       },

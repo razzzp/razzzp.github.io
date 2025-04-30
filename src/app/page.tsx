@@ -68,7 +68,7 @@ function TagsList(props: {tags: string[]}){
 function ProjectComp(props:{project:Project}){
   return (
     <>
-    <div className="pb-10 space-y-4">
+    <div className="py-5 px-5 mb-5 space-y-4 card card-border bg-base-200">
     <h3 className="text-2xl mb-1 text-primary font-mono">{props.project.title}</h3>
     {props.project.content}
     <a className="link-info block" href={props.project.githubUrl}>Github</a>
@@ -87,7 +87,7 @@ function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
         <div
           tabIndex={0}
           role="button"
-          className="btn btn-circle btn-primary shadow-lg"
+          className="btn btn-square btn-primary shadow-lg"
           onClick={()=>setOpen(!open)}
         >
           {open ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
@@ -256,7 +256,7 @@ export default function Home() {
       <NavBar items={[
         {text: "Projects", link: "#projects"},
         {text: "Experience", link: "#experience"},
-        {text: "Education", link: "#education"},
+        {text: "About Me", link: "#aboutme"},
         {text: "Contact", link: "#contact"},
         ]}/>
       <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-30">
@@ -305,17 +305,31 @@ export default function Home() {
           <ExperienceTimelineCustom />
         </FullPaddedSection>
 
-        <FullPaddedSection secId="education">
-          <h2 className="text-4xl pb-4 pt-8" id="education">Education</h2>
-          <div className="pb-4">
-            <h3 className="text-2xl text-primary">Hacktiv8</h3>
-            <h4 className="font-bold">Go Backend</h4>
-          </div>
+        <FullPaddedSection secId="aboutme">
+          <h2 className="text-4xl pb-4 pt-8">About Me</h2>
+          <img className="w-[170px] h-[220px] bg-accent float-left mb-4 mr-4" alt="TODO DP"/>
 
-          <div className="pb-4">
-            <h3 className="text-2xl text-primary">University of Nottingham</h3>
-            <h4 className="font-bold">MEng Electrical and Electronic Engineering</h4>
-          </div>
+          <p className="text-neutral-content">
+            Hi, I’m Razif – a software engineer with a passion for building impactful, 
+            scalable backend systems. I hold an MEng in Electrical and Electronics Engineering 
+            from the University of Nottingham, Malaysia Campus, where I also spent a year 
+            on exchange at the UK campus. During my studies, I was awarded the Dean’s List 
+            (top 10% of my cohort) and earned recognition for leading the Best Full-Year Group Project.
+            <br/><br/>
+            Although my academic background is in electrical & electronics engineering, my curiosity and excitement for 
+            programming led me to pursue a career in software development. I began my journey at IDEMIA, 
+            where I quickly progressed from developer to project lead, delivering high-quality features and 
+            leading cross-functional teams.
+            <br/><br/>
+            To deepen my skills and explore other technologies, I enrolled in Hacktiv8’s Go Backend 
+            Bootcamp, graduating with honors after completing several intensive, hands-on projects. 
+            This experience solidified my foundation in backend engineering and sharpened my 
+            problem-solving abilities.
+            <br/><br/>
+            I’m currently part of the Marketplace Buyer – Homepage team at SeaLabs (Shopee), 
+            where I’m focused on building systems that serve millions of users. I’m always eager 
+            to learn, grow, and contribute to meaningful tech products that make a difference.
+          </p>
         </FullPaddedSection>
 
         <FullPaddedSection secId="contact">
@@ -326,9 +340,10 @@ export default function Home() {
         {/* Floating Collapsible Menu */}
         <CollapsibleFloatingButton items={
           [
-            {text:"About Me", link:"#aboutme"},
-            {text:"Blogs", link:""},
-            {text:"Portfolio", link:""},
+            {text: "Projects", link: "#projects"},
+            {text: "Experience", link: "#experience"},
+            {text: "About Me", link: "#aboutme"},
+            {text: "Contact", link: "#contact"},
           ]
         }/>
         </main>
