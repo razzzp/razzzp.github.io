@@ -68,11 +68,11 @@ function TagsList(props: {tags: string[]}){
 function ProjectComp(props:{project:Project}){
   return (
     <>
-    <div className="py-5 px-5 mb-5 space-y-4 card card-border bg-base-300 hover:bg-base-200 rounded-sm border-2">
-    <h3 className="text-2xl mb-1 text-primary font-mono">{props.project.title}</h3>
-    {props.project.content}
-    <a className="link-info block" href={props.project.githubUrl}>Github</a>
-    <TagsList tags={props.project.tags}/>
+    <div className="py-5 px-5 space-y-4 card card-border bg-base-300 hover:bg-base-200 rounded-sm border-2">
+      <h3 className="text-2xl mb-1 text-primary font-mono">{props.project.title}</h3>
+      {props.project.content}
+      <a className="link-info block" href={props.project.githubUrl}>Github</a>
+      <TagsList tags={props.project.tags}/>
     </div>
     </>
   )
@@ -307,11 +307,13 @@ export default function Home() {
 
         <FullPaddedSection secId="projects">
           <h2 className="text-4xl pb-4 pt-8 font-mono">Projects</h2>
-          {
-            projects.map((proj, idx)=>{
-              return <ProjectComp project={proj} key={idx}/>
-            })
-          }
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+            {
+              projects.map((proj, idx)=>{
+                return <ProjectComp project={proj} key={idx}/>
+              })
+            }
+          </div>
         </FullPaddedSection>
 
         <FullPaddedSection secId="experience">
