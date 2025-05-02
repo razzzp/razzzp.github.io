@@ -46,6 +46,7 @@
 }
 
 @theme {
+  --breakpoint-xs: 40rem;
   --font-sans: var(--font-geist-sans);
   --font-mono: "Space Mono", monospace;
 }

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { experiences, Position, Project, projects } from "./data";
@@ -26,7 +26,7 @@ function NavItemBracket(props:{text:string, link:string}){
 function NavBar(props: {items : {text: string,link: string}[]}){
   return (
     <>
-      <nav className="sticky top-0 py-4 px-20 z-1 backdrop-blur">
+      <nav className="sticky top-0 py-4 px-20 z-1 backdrop-blur  xs:block hidden">
         <ul className="flex justify-center z-2">
           {
             props.items.map((item, idx) => {
@@ -68,7 +68,7 @@ function TagsList(props: {tags: string[]}){
 function ProjectComp(props:{project:Project}){
   return (
     <>
-    <div className="py-5 px-5 mb-5 space-y-4 card card-border bg-base-200">
+    <div className="py-5 px-5 mb-5 space-y-4 card card-border bg-base-300 hover:bg-base-200 rounded-sm border-2">
     <h3 className="text-2xl mb-1 text-primary font-mono">{props.project.title}</h3>
     {props.project.content}
     <a className="link-info block" href={props.project.githubUrl}>Github</a>
@@ -80,32 +80,45 @@ function ProjectComp(props:{project:Project}){
 
 function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
   const [open, setOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  // Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <>
-    <div className="fixed bottom-6 right-6 z-1">
-      <div className="dropdown dropdown-top dropdown-end">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-square btn-primary shadow-lg"
-          onClick={()=>setOpen(!open)}
-        >
-          {open ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
-        </div>
-          <ul
-            tabIndex={0}
-            className={`menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-44 space-y-1}`}
-          >
-            {
-              props.items.map((item,idx)=>{
-                return <li key={idx}>
-                  <Link href={item.link}>
-                    {item.text}
-                  </Link>
-                </li>
-              })
-            }
-          </ul>
+    <div className="fixed bottom-6 right-6 z-1 flex flex-col xs:hidden" ref={dropdownRef}>
+        { open &&
+      <ul
+        tabIndex={0}
+        className={`menu mt-2 z-1 p-2 shadow bg-base-100 w-44 space-y-1 rounded-xs`}
+      >
+        {
+          props.items.map((item,idx)=>{
+            return <li key={idx}>
+              <Link href={item.link}>
+                {item.text}
+              </Link>
+            </li>
+          })
+        }
+      </ul>
+      }
+      <div
+        tabIndex={0}
+        role="button"
+        className={"btn btn-square btn-primary shadow-lg rounded-xs self-end"}
+        onClick={()=>setOpen(!open)}
+      >
+        {open ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
       </div>
     </div>
     </>
@@ -202,7 +215,7 @@ function ExperienceTimelineCustom() {
         return (
           <li key={idx}>
             {/* icon */}
-            <div className="grid grid-cols-12 lg:grid-rows-[20px_auto] lg:grid-cols-[max-content_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+            <div className="grid grid-cols-12 grid-rows-[20px_auto] lg:grid-cols-[max-content_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
               <div className="lg:col-start-4 lg:self-start col-start-1 justify-self-center self-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -220,15 +233,16 @@ function ExperienceTimelineCustom() {
               {/* line */}
               {
                 idx != arr.length-1 ?  
-                  <div className={"lg:col-start-4 lg:row-start-2 col-start-1 justify-self-center border-0 w-[0.25em] h-full bg-secondary"}/> 
+                  <div className={"lg:col-start-4 col-start-1 row-start-2 justify-self-center border-0 w-[0.25em] h-full bg-secondary"}/> 
                   : "" 
               }
               {/* time */}
-              <div className="lg:col-start-1 lg:col-span-3 row-start-1 col-start-2 col-span-full items-start">
+              <div className="lg:col-start-1 lg:col-span-3 lg:block row-start-1 col-start-2 col-span-full items-start hidden">
                 <time className="font-mono italic">{dispDate(exp.startDate)}{exp.endDate? `- ${dispDate(exp.endDate)}`: " - Current"}</time>
               </div>
               {/* content */}
-              <div className="lg:col-start-5 lg:row-start-1  lg:row-span-2 row-start-2 col-start-2 col-span-full pb-7">                      
+              <div className="lg:col-start-5 lg:row-start-1  lg:row-span-2 row-start-1 row-span-2 col-start-2 col-span-full pb-5 hover:bg-base-200 rounde-sm px-5">
+                <time className="font-mono italic lg:hidden">{dispDate(exp.startDate)}{exp.endDate? `- ${dispDate(exp.endDate)}`: " - Current"}</time>
                 <div className="text-lg font-black font-mono">{exp.title}</div>
                 <Expandable>
                 <ul>
