@@ -95,7 +95,7 @@ function CollapsibleFloatingButton(props:{items:{text:string, link:string}[]}){
 
   return (
     <>
-    <div className="fixed bottom-6 right-6 z-1 flex flex-col xs:hidden" ref={dropdownRef}>
+    <div className="fixed bottom-6 right-15 z-1 flex flex-col xs:hidden" ref={dropdownRef}>
         { open &&
       <ul
         tabIndex={0}
