@@ -5,7 +5,6 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaEnvelope, FaGithub, FaLinkedin, FaTimes } from "react-icons/fa";
 import { experiences, Position, Project, projects } from "./data";
-import { GiExpandedRays } from "react-icons/gi";
 
 function NavItemUnderline(props: {text: string,link: string, key:number}){
   return (<li className="mr-3"><a className="underline
