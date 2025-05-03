@@ -59,7 +59,7 @@ export const projects: Project[] = [
         </p>
       </>
     ),
-    githubUrl: "",
+    githubUrl: "https://github.com/razzzp/KennelView",
     tags: ["C++", "Qt"],
   },
 ];
