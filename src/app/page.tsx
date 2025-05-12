@@ -43,7 +43,7 @@ function FullPaddedSection(props :{children:ReactNode, secId?: string}) {
     <>
     <section className="min-h-screen w-full">
         {/* dummy sec for anchor */}
-        <div id={props.secId} className="h-4"></div>
+        <div id={props.secId} className="h-6"></div>
         {props.children}
     </section>
     </>
@@ -308,7 +308,7 @@ export default function Home() {
         {text: "About Me", link: "#aboutme"},
         {text: "Contact", link: "#contact"},
         ]}/>
-      <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-50">
+      <main className="flex flex-col items-center justify-center text-base-content px-15 md:px-30 lg:px-50 xl:px-80">
         <FullPaddedSection>
           <div className="space-y-4 h-[70vh] flex flex-col justify-center">
             <h2 className="text-4xl font-mono">Hi 👋,<br/> I'm <span className="font-bold text-primary">Razif</span> </h2>
@@ -358,25 +358,39 @@ export default function Home() {
 
         <FullPaddedSection secId="aboutme">
           <h2 className="text-4xl pb-4 pt-8">About Me</h2>
-          <img className="w-[170px] h-[220px] bg-accent float-left mb-4 mr-4" alt="TODO DP"/>
+          
+          <div className="overflow-hidden">
+            <img src="linkedin.jpg" alt="Profile Photo" className="w-[150px] float-left border-radius-1 rounded-md mb-4 mr-4" />
+            <p className="text-neutral-content">
+              Hi, I’m Razif – a software engineer with a passion for building impactful, 
+              scalable backend systems. I hold an MEng in Electrical and Electronics Engineering 
+              from the University of Nottingham, Malaysia Campus, where I also spent a year 
+              on exchange at the UK campus. During my studies, I was awarded the Dean’s List 
+              (top 10% of my cohort) and earned recognition for leading the Best Full-Year Group Project.
+            </p>
+          </div>
+          <br/>
+
+          <div>
+            <img src="graduation.jpg" alt="Profile Photo" className="w-[150px] float-right border-radius-1 rounded-md mb-4 ml-4" />
+            <p className="text-neutral-content">
+              Although my academic background is in electrical & electronics engineering, my curiosity and excitement for 
+              programming led me to pursue a career in software development. I began my journey at IDEMIA, 
+              where I quickly progressed from developer to project lead, delivering high-quality features and 
+              leading cross-functional teams.
+            </p>
+          </div>
+          <br/>
 
           <p className="text-neutral-content">
-            Hi, I’m Razif – a software engineer with a passion for building impactful, 
-            scalable backend systems. I hold an MEng in Electrical and Electronics Engineering 
-            from the University of Nottingham, Malaysia Campus, where I also spent a year 
-            on exchange at the UK campus. During my studies, I was awarded the Dean’s List 
-            (top 10% of my cohort) and earned recognition for leading the Best Full-Year Group Project.
-            <br/><br/>
-            Although my academic background is in electrical & electronics engineering, my curiosity and excitement for 
-            programming led me to pursue a career in software development. I began my journey at IDEMIA, 
-            where I quickly progressed from developer to project lead, delivering high-quality features and 
-            leading cross-functional teams.
-            <br/><br/>
             To deepen my skills and explore other technologies, I enrolled in Hacktiv8’s Go Backend 
             Bootcamp, graduating with honors after completing several intensive, hands-on projects. 
             This experience solidified my foundation in backend engineering and sharpened my 
             problem-solving abilities.
-            <br/><br/>
+          </p>
+          <br/>
+
+          <p className="text-neutral-content">
             I’m currently part of the Marketplace Buyer – Homepage team at SeaLabs (Shopee), 
             where I’m focused on building systems that serve millions of users. I’m always eager 
             to learn, grow, and contribute to meaningful tech products that make a difference.
