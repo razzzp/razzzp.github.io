@@ -357,7 +357,7 @@ export default function Home() {
         </FullPaddedSection>
 
         <FullPaddedSection secId="aboutme">
-          <h2 className="text-4xl pb-4 pt-8">About Me</h2>
+          <h2 className="text-4xl pb-4 pt-8 font-mono">About Me</h2>
           
           <div className="overflow-hidden">
             <img src="linkedin.jpg" alt="Profile Photo" className="w-[150px] float-left border-radius-1 rounded-md mb-4 mr-4" />
@@ -398,7 +398,7 @@ export default function Home() {
         </FullPaddedSection>
 
         <FullPaddedSection secId="contact">
-          <h2 className="text-4xl pd-4 pt-8" id="contact">Contact</h2>
+          <h2 className="text-4xl pd-4 pt-8 font-mono" id="contact">Contact</h2>
           <ContactSection></ContactSection>
         </FullPaddedSection>
 
